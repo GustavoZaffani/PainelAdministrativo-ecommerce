@@ -7,3 +7,9 @@ INSERT INTO usuario(nome, username, password) VALUES ('Teste', 'teste','$2a$10$.
 INSERT INTO usuario_permissoes(usuario_id, permissoes_id) VALUES (1, 1);
 INSERT INTO usuario_permissoes(usuario_id, permissoes_id) VALUES (1, 2);
 INSERT INTO usuario_permissoes(usuario_id, permissoes_id) VALUES (2, 2);
+
+INSERT INTO categoria (descricao) VALUES ('Categoria 1');
+INSERT INTO categoria (descricao) VALUES ('Categoria 2');
+INSERT INTO categoria (descricao) VALUES ('Categoria 3');
+INSERT INTO categoria (descricao) VALUES ('Categoria 4');
+INSERT INTO categoria (descricao) VALUES ('Categoria 5');

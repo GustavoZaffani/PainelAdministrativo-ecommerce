@@ -23,8 +23,10 @@
         <link rel="stylesheet" th:href="@{/vendors/sweetalert/sweetalert.css}"/>
         <link rel="stylesheet" th:href="@{/vendors/bootstrap-datepicker/css/bootstrap-datepicker.min.css}"/>
         <link rel="stylesheet" th:href="@{/vendors/materialDesign/css/mdb.css}">
+        <link rel="stylesheet" th:href="@{/css/styles.css}">
+        <link rel="stylesheet" th:href="@{/vendors/jquery-toast-plugin-master/src/jquery.toast.css}">
         <script type="text/javascript" th:src="@{/vendors/jquery/jquery.js}"></script>
-        <script type="text/javascript" th:src="@{teste.js}"></script>
+        <script type="text/javascript" th:src="@{/js/teste.js}"></script>
     </head>
 
     <body>
@@ -60,13 +62,19 @@
                     <div class="sidebar-menu">
                         <ul>
                             <li>
+                                <a th:href="@{/}">
+                                    <i class="fa fa-home"></i>
+                                    <span>Início</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-box-open"></i>
                                     <span>Produtos</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a th:href="@{/categoria}">
                                     <i class="fa fa-clipboard-list"></i>
                                     <span>Categorias</span>
                                 </a>
@@ -140,5 +148,7 @@
                 th:src="@{/vendors/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
         <script src="http://parsleyjs.org/dist/parsley.min.js"></script>
         <script type="text/javascript" th:src="@{/vendors/parsley/pt-br.js}"></script>
+        <script type="text/javascript" th:src="@{/vendors/jquery-toast-plugin-master/src/jquery.toast.js}"></script>
+        <script type="text/javascript" th:src="@{/js/messages.js}"></script>
     </body>
 </html>
