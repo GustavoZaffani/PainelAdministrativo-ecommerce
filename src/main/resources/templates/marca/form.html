@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-padrao}">
+<head>
+</head>
+<body>
+<section layout:fragment="conteudo">
+
+    <div class="card text-center border-radius-20">
+
+        <div class="card-header card-header-default">
+            <button class="btn btn-outline-primary waves-effect border-radius-20">
+                <i class="fa fa-arrow-left"></i>
+            </button>
+            <h5 class="card-title m-right-10">Cadastro de Marca</h5>
+        </div>
+
+        <form th:action="@{/marca}"
+              method="post"
+              th:object="${marca}">
+
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group text-left">
+                            <label for="id">Código</label>
+                            <input id="id"
+                                   type="text"
+                                   class="form-control"
+                                   th:field="*{id}"
+                                   readonly/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <div class="form-group text-left">
+                            <label for="descricao">Descrição</label>
+                            <input id="descricao"
+                                   type="text"
+                                   class="form-control"
+                                   th:field="*{descricao}"/>
+                            <span th:if="${#fields.hasErrors('descricao')}"
+                                  th:errors="*{descricao}"
+                                  class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer py-2">
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-primary border-radius-20"
+                                type="submit">Salvar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
+</body>
+</html>
