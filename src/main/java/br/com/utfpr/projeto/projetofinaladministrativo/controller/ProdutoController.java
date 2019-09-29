@@ -5,6 +5,8 @@ import br.com.utfpr.projeto.projetofinaladministrativo.service.CategoriaService;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.MarcaService;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,20 +42,15 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public String save(@Valid Produto produto,
-                       BindingResult result,
-                       Model model,
-                       RedirectAttributes attributes) {
+    public ResponseEntity save(@Valid Produto produto,
+                               BindingResult result,
+                               Model model,
+                               RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            loadCombo(model);
-            model.addAttribute("produto", produto);
-            return "produto/form";
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-
         produtoService.save(produto);
-        attributes.addFlashAttribute("sucesso",
-                "Registro salvo com sucesso!");
-        return "redirect:/produto";
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("{id}")
@@ -64,17 +61,14 @@ public class ProdutoController {
     }
 
     @DeleteMapping("{id}")
-    public String delete(@PathVariable Long id,
+    public ResponseEntity delete(@PathVariable Long id,
                          RedirectAttributes attributes) {
         try {
             produtoService.delete(id);
-            attributes.addFlashAttribute("sucesso",
-                    "Registro removido com sucesso!");
+            return new ResponseEntity(HttpStatus.OK);
         } catch (Exception e) {
-            attributes.addFlashAttribute("erro",
-                    "Falha ao remover o registro!");
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        return "redirect:/produtos";
     }
 
     private void loadCombo(Model model) {

@@ -12,15 +12,17 @@
     <div class="card text-center border-radius-20">
 
         <div class="card-header card-header-default">
-            <button class="btn btn-outline-primary waves-effect border-radius-20">
+            <button class="btn btn-outline-primary waves-effect border-radius-20"
+                    onclick="back()">
                 <i class="fa fa-arrow-left"></i>
             </button>
             <h5 class="card-title m-right-10">Cadastro de Categoria</h5>
         </div>
 
-        <form th:action="@{/categoria}"
+        <form id="formCategoria" th:action="@{/categoria}"
               method="post"
-              th:object="${categoria}">
+              th:object="${categoria}"
+              onsubmit="validaCategoria('/categoria', '#formCategoria')">
 
             <div class="card-body">
 
@@ -41,11 +43,9 @@
                             <label for="descricao">Descrição</label>
                             <input id="descricao"
                                    type="text"
+                                   name="descricao"
                                    class="form-control"
                                    th:field="*{descricao}"/>
-                            <span th:if="${#fields.hasErrors('descricao')}"
-                                  th:errors="*{descricao}"
-                                  class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,9 @@
             </div>
         </form>
     </div>
-
 </section>
+<th:block layout:fragment="script">
+    <script type="text/javascript" th:src="@{/js/categoria.js}"></script>
+</th:block>
 </body>
 </html>

@@ -1,0 +1,3 @@
+$(function () {
+    validaProduto('/produto', '#formProduto');
+});

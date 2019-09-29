@@ -3,6 +3,8 @@ package br.com.utfpr.projeto.projetofinaladministrativo.controller;
 import br.com.utfpr.projeto.projetofinaladministrativo.model.Categoria;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,19 +33,14 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public String save(@Valid Categoria categoria,
-                       BindingResult result,
-                       Model model,
-                       RedirectAttributes attributes) {
+    public ResponseEntity save(@Valid Categoria categoria,
+                               BindingResult result) {
         if (result.hasErrors()) {
-            model.addAttribute("categoria", categoria);
-            return "categoria/form";
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
         categoriaService.save(categoria);
-        attributes.addFlashAttribute("sucesso",
-                "Registro salvo com sucesso!");
-        return "redirect:/categoria";
+        return ResponseEntity.status(HttpStatus.OK).body(result.getAllErrors());
     }
 
     @GetMapping("{id}")
@@ -53,16 +50,13 @@ public class CategoriaController {
     }
 
     @DeleteMapping("{id}")
-    public String delete(@PathVariable Long id,
+    public ResponseEntity delete(@PathVariable Long id,
                          RedirectAttributes attributes) {
         try {
             categoriaService.delete(id);
-            attributes.addFlashAttribute("sucesso",
-                    "Registro removido com sucesso!");
+            return new ResponseEntity(HttpStatus.OK);
         } catch (Exception e) {
-            attributes.addFlashAttribute("erro",
-                    "Falha ao remover o registro!");
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        return "redirect:/categoria";
     }
 }

@@ -52,9 +52,4 @@ public class Fornecedor {
     @ManyToOne
     @JoinColumn(name = "cidade_id", referencedColumnName = "id")
     private Cidade cidade;
-
-    @NotEmpty(message = "O campo 'Número' é de preenchimento obrigatório'")
-    @Column(name = "nro", nullable = false)
-    private String nro;
-
 }

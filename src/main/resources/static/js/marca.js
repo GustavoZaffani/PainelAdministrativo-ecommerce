@@ -1,0 +1,3 @@
+$(function () {
+    validaMarca('/marca', '#formMarca');
+});

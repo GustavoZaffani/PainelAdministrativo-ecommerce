@@ -11,3 +11,23 @@
 .m-right-10 {
     margin: 0 0 0 10px;
 }
+
+.sweet-alert {
+    border-radius: 25px !important;
+}
+
+.error {
+    color: #b71c1c;
+}
+
+.border-cabecalho-list {
+    border-bottom: 2px solid #dedede;
+}
+
+.btn-edit, .btn-delete {
+    border-radius: 30px !important; padding: 15px !important;
+}
+
+.btn-edit i, .btn-delete i {
+    margin: 0px !important;
+}
