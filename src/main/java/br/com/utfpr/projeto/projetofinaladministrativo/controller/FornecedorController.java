@@ -1,6 +1,5 @@
 package br.com.utfpr.projeto.projetofinaladministrativo.controller;
 
-import br.com.utfpr.projeto.projetofinaladministrativo.model.Estado;
 import br.com.utfpr.projeto.projetofinaladministrativo.model.Fornecedor;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.CidadeService;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.EstadoService;
@@ -12,10 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("fornecedor")
@@ -43,13 +40,10 @@ public class FornecedorController {
 
     @PostMapping
     public ResponseEntity save(@Valid Fornecedor fornecedor,
-                               BindingResult result,
-                               Model model,
-                               RedirectAttributes attributes) {
+                               BindingResult result) {
         if (result.hasErrors()) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-
         fornecedorService.save(fornecedor);
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -75,14 +69,4 @@ public class FornecedorController {
         model.addAttribute("estados", estadoService.findAll());
         model.addAttribute("cidades", cidadeService.findAll());
     }
-
-    // TODO necessário verificar maneira de fazer um complete
-    @GetMapping("complete/{texto}")
-    public String complete(@PathVariable("texto") String texto,
-                           Model model) {
-        model.addAttribute("cidades", cidadeService.findAll());
-        model.addAttribute("estados", estadoService.complete(texto));
-        return "fornecedor/form";
-    }
-
 }

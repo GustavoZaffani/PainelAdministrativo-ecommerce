@@ -1,9 +1,6 @@
 package br.com.utfpr.projeto.projetofinaladministrativo.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -45,6 +42,14 @@ public class Usuario implements Serializable, UserDetails {
         List<GrantedAuthority> list = new ArrayList<>();
         list.addAll(this.permissoes);
         return list;
+    }
+
+    public void setPermissoes(Set<Permissao> permissoes) {
+        this.permissoes = permissoes;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

@@ -34,9 +34,7 @@ public class MarcaController {
 
     @PostMapping
     public ResponseEntity save(@Valid Marca marca,
-                               BindingResult result,
-                               Model model,
-                               RedirectAttributes attributes) {
+                               BindingResult result) {
         if (result.hasErrors()) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
@@ -52,8 +50,7 @@ public class MarcaController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable Long id,
-                         RedirectAttributes attributes) {
+    public ResponseEntity delete(@PathVariable Long id) {
         try {
             marcaService.delete(id);
             return new ResponseEntity(HttpStatus.OK);

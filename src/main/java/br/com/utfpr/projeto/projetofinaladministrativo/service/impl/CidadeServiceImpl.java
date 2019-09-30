@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CidadeServiceImpl extends CrudServiceImpl<Cidade, Long>
     implements CidadeService {
@@ -17,5 +19,10 @@ public class CidadeServiceImpl extends CrudServiceImpl<Cidade, Long>
     @Override
     protected JpaRepository<Cidade, Long> getRepository() {
         return cidadeRepository;
+    }
+
+    @Override
+    public List<Cidade> complete(String texto, Long idEstado) {
+        return cidadeRepository.findByNomeLikeAndEstadoId("%" + texto + "%", idEstado);
     }
 }

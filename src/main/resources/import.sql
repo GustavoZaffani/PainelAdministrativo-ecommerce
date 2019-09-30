@@ -3104,7 +3104,7 @@ INSERT INTO cidade (id, nome, estado_id) VALUES (1731, 'Catas Altas', 11);
 -- INSERT INTO cidade (id, nome, estado_id) VALUES (3039, 'Paranapoema', 18);
 -- INSERT INTO cidade (id, nome, estado_id) VALUES (3040, 'Paranavaí', 18);
 -- INSERT INTO cidade (id, nome, estado_id) VALUES (3041, 'Pato Bragado', 18);
--- INSERT INTO cidade (id, nome, estado_id) VALUES (3042, 'Pato Branco', 18);
+INSERT INTO cidade (id, nome, estado_id) VALUES (3042, 'Pato Branco', 18);
 -- INSERT INTO cidade (id, nome, estado_id) VALUES (3043, 'Paula Freitas', 18);
 -- INSERT INTO cidade (id, nome, estado_id) VALUES (3044, 'Paulo Frontin', 18);
 -- INSERT INTO cidade (id, nome, estado_id) VALUES (3045, 'Peabiru', 18);

@@ -1,0 +1,3 @@
+$(function () {
+    validaUsuario('/usuario', '#formUsuario');
+});

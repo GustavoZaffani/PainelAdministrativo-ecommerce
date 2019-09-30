@@ -50,8 +50,7 @@ public class CategoriaController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable Long id,
-                         RedirectAttributes attributes) {
+    public ResponseEntity delete(@PathVariable Long id) {
         try {
             categoriaService.delete(id);
             return new ResponseEntity(HttpStatus.OK);

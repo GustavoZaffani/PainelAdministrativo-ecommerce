@@ -43,9 +43,7 @@ public class ProdutoController {
 
     @PostMapping
     public ResponseEntity save(@Valid Produto produto,
-                               BindingResult result,
-                               Model model,
-                               RedirectAttributes attributes) {
+                               BindingResult result) {
         if (result.hasErrors()) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
@@ -61,8 +59,7 @@ public class ProdutoController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable Long id,
-                         RedirectAttributes attributes) {
+    public ResponseEntity delete(@PathVariable Long id) {
         try {
             produtoService.delete(id);
             return new ResponseEntity(HttpStatus.OK);

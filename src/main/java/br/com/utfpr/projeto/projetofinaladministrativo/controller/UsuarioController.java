@@ -1,8 +1,13 @@
 package br.com.utfpr.projeto.projetofinaladministrativo.controller;
 
+import br.com.utfpr.projeto.projetofinaladministrativo.model.Permissao;
 import br.com.utfpr.projeto.projetofinaladministrativo.model.Usuario;
+import br.com.utfpr.projeto.projetofinaladministrativo.service.PermissaoService;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping("usuario")
@@ -17,10 +24,12 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private PermissaoService permissaoService;
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("usuarioss", usuarioService.findAll());
+        model.addAttribute("usuarios", usuarioService.findAll());
         return "usuario/list";
     }
 
@@ -31,19 +40,19 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public String save(@Valid Usuario usuario,
-                       BindingResult result,
-                       Model model,
-                       RedirectAttributes attributes) {
+    public ResponseEntity save(@Valid Usuario usuario,
+                               BindingResult result) {
         if (result.hasErrors()) {
-            model.addAttribute("usuario", usuario);
-            return "usuario/form";
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
+        Set<Permissao> permissoes = new HashSet<>();
+        permissoes.add(permissaoService.findOne(1));
+
+        usuario.setPermissoes(permissoes);
+        usuario.setPassword(new BCryptPasswordEncoder().encode(usuario.getPassword()));
         usuarioService.save(usuario);
-        attributes.addFlashAttribute("sucesso",
-                "Registro salvo com sucesso!");
-        return "redirect:/usuario";
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("{id}")
@@ -53,16 +62,12 @@ public class UsuarioController {
     }
 
     @DeleteMapping("{id}")
-    public String delete(@PathVariable Long id,
-                         RedirectAttributes attributes) {
+    public ResponseEntity delete(@PathVariable Long id) {
         try {
             usuarioService.delete(id);
-            attributes.addFlashAttribute("sucesso",
-                    "Registro removido com sucesso!");
+            return new ResponseEntity(HttpStatus.OK);
         } catch (Exception e) {
-            attributes.addFlashAttribute("erro",
-                    "Falha ao remover o registro!");
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        return "redirect:/usuario";
     }
 }

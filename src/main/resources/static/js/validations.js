@@ -127,6 +127,45 @@ function validaFornecedor(urlDestino, form) {
             }
         },
         submitHandler: function (frm) {
+            return saveForn(urlDestino, form);
+        }
+    });
+}
+
+function validaUsuario(urlDestino, form) {
+    $('#formUsuario').validate({
+        rules:{
+            nome: {
+                required: true
+            },
+            usuario: {
+                required: true
+            },
+            senha: {
+                required: true
+            },
+            confSenha: {
+                required: true,
+                equalTo: "#senha"
+            }
+
+        },
+        messages: {
+            nome: {
+                required: "Preenchimento obrigatório!"
+            },
+            usuario: {
+                required: "Preenchimento obrigatório!"
+            },
+            senha: {
+                required: "Preenchimento obrigatório!"
+            },
+            confSenha: {
+                required: "Preenchimento obrigatório!",
+                equalTo: "A senha não corresponde com a que foi informada!"
+            }
+        },
+        submitHandler: function (frm) {
             return save(urlDestino, form);
         }
     });

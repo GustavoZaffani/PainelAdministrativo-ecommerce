@@ -88,40 +88,44 @@
                     <div class="col-md-6">
                         <div class="form-group text-left">
                             <label for="cidade">Cidade</label>
-                            <select class="form-control"
-                                    id="cidade"
-                                    name="cidade"
-                                    th:field="*{cidade}">
-                                <option value="">Selecione uma Opção</option>
-                                <option th:each="cidade: ${cidades}"
-                                        th:value="${cidade.id}"
-                                        th:text="${cidade.nome}"></option>
-                            </select>
+                            <input type="text"
+                                   id="cidade"
+                                   name="cidade"
+                                   th:field="*{cidade}"
+                                   class="form-control">
+<!--                            <select class="form-control"-->
+<!--                                    id="cidade"-->
+<!--                                    name="cidade"-->
+<!--                                    th:field="*{cidade}">-->
+<!--                                <option value="">Selecione uma Opção</option>-->
+<!--                                <option th:each="cidade: ${cidades}"-->
+<!--                                        th:value="${cidade.id}"-->
+<!--                                        th:text="${cidade.nome}"></option>-->
+<!--                            </select>-->
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="form-group text-left">
                             <label for="estado">Estado</label>
-<!--                            <input type="text"-->
-<!--                                   id="estado"-->
-<!--                                   name="estado"-->
-<!--                                   class="form-control"-->
-<!--                                   list="state"-->
-<!--                                   onkeypress="findEstado()">-->
+                            <input type="text"
+                                   id="estado"
+                                   name="estado"
+                                   th:field="*{estado}"
+                                   class="form-control">
 <!--                            <datalist id="state">-->
 <!--                                <option value="Teste" data-value="1"></option>-->
 <!--                                <option value="Vitória"></option>-->
 <!--                            </datalist>-->
-                            <select class="form-control"
-                                    id="estado"
-                                    name="estado"
-                                    th:field="*{estado}">
-                                <option value=""> (selecione)</option>
-                                <option th:each="estado: ${estados}"
-                                        th:value="${estado.id}"
-                                        th:text="${estado.nome}"></option>
-                            </select>
+<!--                            <select class="form-control"-->
+<!--                                    id="estado"-->
+<!--                                    name="estado"-->
+<!--                                    th:field="*{estado}">-->
+<!--                                <option value=""> (selecione)</option>-->
+<!--                                <option th:each="estado: ${estados}"-->
+<!--                                        th:value="${estado.id}"-->
+<!--                                        th:text="${estado.nome}"></option>-->
+<!--                            </select>-->
                         </div>
                     </div>
 
@@ -131,7 +135,7 @@
                             <input id="dataFundacao"
                                    name="dataFundacao"
                                    type="text"
-                                   class="form-control"
+                                   class="form-control datepicker"
                                    th:field="*{dataFundacao}"/>
                         </div>
                     </div>

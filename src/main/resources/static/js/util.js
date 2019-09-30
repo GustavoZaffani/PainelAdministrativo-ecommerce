@@ -62,3 +62,10 @@ function remove(id, url) {
 function back() {
     window.history.back();
 }
+
+function formataMoeda(valor) {
+    let valorReturn = Number(valor);
+    valorReturn = valorReturn.toFixed(2);
+    valorReturn = valorReturn.replace('.', ',');
+    return valorReturn;
+}

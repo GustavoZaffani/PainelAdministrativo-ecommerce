@@ -19,6 +19,7 @@
               integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
               crossorigin="anonymous">
         <link rel="stylesheet" href="https://unpkg.com/shards-ui@latest/dist/css/shards.min.css">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         <link rel="stylesheet" th:href="@{/css/sidebar.css}"/>
         <link rel="stylesheet" th:href="@{/vendors/sweetalert/sweetalert.css}"/>
         <link rel="stylesheet" th:href="@{/vendors/bootstrap-datepicker/css/bootstrap-datepicker.min.css}"/>
@@ -103,7 +104,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a th:href="@{/usuario}">
                                     <i class="fa fa-user"></i>
                                     <span>Usuários</span>
                                 </a>
@@ -153,6 +154,10 @@
         <script type="text/javascript" th:src="@{/js/validations.js}"></script>
         <script type="text/javascript" th:src="@{/js/messages.js}"></script>
         <script type="text/javascript" th:src="@{/js/util.js}"></script>
+        <script type="text/javascript">$('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        })</script>
         <th:block layout:fragment="script"></th:block>
     </body>
 </html>

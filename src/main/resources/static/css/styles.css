@@ -31,3 +31,7 @@
 .btn-edit i, .btn-delete i {
     margin: 0px !important;
 }
+
+.datepicker {
+    padding: 8px 16px 8px 16px !important;
+}

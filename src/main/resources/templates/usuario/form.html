@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-padrao}">
+<head>
+</head>
+<body>
+<section layout:fragment="conteudo">
+
+    <div class="card text-center border-radius-20">
+
+        <div class="card-header card-header-default">
+            <button class="btn btn-outline-primary waves-effect border-radius-20" onclick="back()">
+                <i class="fa fa-arrow-left"></i>
+            </button>
+            <h5 class="card-title m-right-10">Cadastro de Usuário</h5>
+        </div>
+
+        <form id="formUsuario" th:action="@{/usuario}"
+              method="post"
+              th:object="${usuario}"
+              onsubmit="validaUsuario('/usuario', '#formUsuario')">
+
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group text-left">
+                            <label for="id">Código</label>
+                            <input id="id"
+                                   name="id"
+                                   type="text"
+                                   class="form-control"
+                                   th:field="*{id}"
+                                   readonly/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <div class="form-group text-left">
+                            <label for="nome">Nome</label>
+                            <input id="nome"
+                                   name="nome"
+                                   type="text"
+                                   class="form-control"
+                                   th:field="*{nome}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group text-left">
+                            <label for="usuario">Usuário</label>
+                            <input id="usuario"
+                                   name="usuario"
+                                   type="text"
+                                   class="form-control"
+                                   th:field="*{username}"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group text-left">
+                            <label for="senha">Senha</label>
+                            <input id="senha"
+                                   name="senha"
+                                   type="password"
+                                   class="form-control"
+                                   th:field="*{password}"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group text-left">
+                            <label for="confSenha">Confirme a Senha</label>
+                            <input id="confSenha"
+                                   name="confSenha"
+                                   type="password"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer py-2">
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-primary border-radius-20"
+                                type="submit">Salvar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<th:block layout:fragment="script">
+    <script type="text/javascript" th:src="@{/js/usuario.js}"></script>
+</th:block>
+</body>
+</html>
