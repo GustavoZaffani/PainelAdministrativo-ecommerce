@@ -1,10 +1,13 @@
 package br.com.utfpr.projeto.projetofinaladministrativo.controller;
 
 import br.com.utfpr.projeto.projetofinaladministrativo.model.Permissao;
+import br.com.utfpr.projeto.projetofinaladministrativo.model.Produto;
 import br.com.utfpr.projeto.projetofinaladministrativo.model.Usuario;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.PermissaoService;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,7 +19,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("usuario")
@@ -28,8 +35,22 @@ public class UsuarioController {
     private PermissaoService permissaoService;
 
     @GetMapping
-    public String findAll(Model model) {
-        model.addAttribute("usuarios", usuarioService.findAll());
+    public String findAll(@RequestParam("page") Optional<Integer> page,
+                          @RequestParam("size") Optional<Integer> size,
+                          Model model) {
+
+        int curretPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+        Page<Usuario> list = this.usuarioService.findAll(
+                PageRequest.of(curretPage - 1, pageSize)
+        );
+        model.addAttribute("usuarios", list);
+        if (list.getTotalPages() > 0) {
+            List<Integer> pageNumbers = IntStream
+                    .rangeClosed(1, list.getTotalPages())
+                    .boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
         return "usuario/list";
     }
 

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CidadeRepository extends JpaRepository<Cidade, Long> {
 
-    List<Cidade> findByNomeLikeAndEstadoId(String texto, Long idEstado);
+    List<Cidade> findByNomeLikeIgnoreCaseAndEstadoId(String texto, Long idEstado);
 }

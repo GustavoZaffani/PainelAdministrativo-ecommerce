@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EstadoRepository extends JpaRepository<Estado, Long> {
 
-    List<Estado> findByNomeLike(String texto);
+    List<Estado> findByNomeLikeIgnoreCase(String texto);
 }

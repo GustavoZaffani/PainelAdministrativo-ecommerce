@@ -20,4 +20,9 @@ public class ForncedorServiceImpl extends CrudServiceImpl<Fornecedor, Long>
     protected JpaRepository<Fornecedor, Long> getRepository() {
         return fornecedorRepository;
     }
+
+    @Override
+    public List<Fornecedor> complete(String texto) {
+        return fornecedorRepository.findByNomeFantasiaOrRazaoSocial("%" + texto.toUpperCase() + "%");
+    }
 }

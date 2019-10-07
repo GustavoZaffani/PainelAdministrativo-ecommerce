@@ -23,6 +23,6 @@ public class EstadoServiceImpl extends CrudServiceImpl<Estado, Long>
 
     @Override
     public List<Estado> complete(String texto) {
-        return estadoRepository.findByNomeLike("%" + texto + "%");
+        return estadoRepository.findByNomeLikeIgnoreCase("%" + texto + "%");
     }
 }

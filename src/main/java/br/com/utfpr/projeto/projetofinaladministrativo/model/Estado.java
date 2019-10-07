@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Table(name = "estado")
-public class Estado {
+public class Estado implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

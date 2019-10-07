@@ -1,7 +1,39 @@
 $(function () {
     validaFornecedor('/fornecedor', '#formFornecedor');
+    buildCompletes();
+    habilitaCidade();
+    findDadosOnEdit();
+});
 
-    $("#estado" ).autocomplete({
+function findDadosOnEdit() {
+    let cidade = $('#cidade').val();
+    let estado = $('#estado').val();
+    if (cidade != null && cidade !== "" &&
+        estado != null && estado !== "") {
+        $.get(`estado/${$('#estado').val()}`, function (data) {
+            if (data != null) {
+                $('#estado').val(data.id + " - " + data.nome);
+            }
+        });
+        $.get(`cidade/${$('#cidade').val()}`, function (data) {
+            if (data != null) {
+                $('#cidade').val(data.id + " - " + data.nome);
+            }
+        });
+    }
+}
+
+function habilitaCidade() {
+    let estado = $('#estado').val();
+    if (estado != null && estado !== "") {
+        $('#cidade').attr('disabled', false);
+    } else {
+        $('#cidade').attr('disabled', true);
+    }
+}
+
+function buildCompletes() {
+    $("#estado").autocomplete({
         source: function (request, response) {
             $.ajax({
                 url: 'estado/complete',
@@ -10,20 +42,24 @@ $(function () {
                 data: {
                     'texto': request.term
                 }
-            , success: function (data) {
-                response($.map(data, function (item) {
-                    return {
-                        label: item.nome,
-                        value: item.id,
-                    }
-                }));
-            }});
+                , success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.nome,
+                            value: item.id + " - " + item.nome,
+                        }
+                    }));
+                }
+            });
+        }, select(event, ui) {
+            habilitaCidade();
         }
     });
 
-    $("#cidade" ).autocomplete({
+    $("#cidade").autocomplete({
         source: function (request, response) {
-            var idEstado = $('#estado').val();
+            var idEstado = $('#estado').val().split(" ");
+            idEstado = idEstado[0];
             $.ajax({
                 url: `cidade/complete/${idEstado}`,
                 type: 'GET',
@@ -35,15 +71,21 @@ $(function () {
                     response($.map(data, function (item) {
                         return {
                             label: item.nome,
-                            value: item.id
+                            value: item.id + " - " + item.nome
                         }
                     }));
-                }});
+                }
+            });
         }
     });
-});
+}
 
 function saveForn(urlDestino, form) {
+
+    let estado = $('#estado').val().split(" ");
+    $('#estado').val(estado[0]);
+    let cidade = $('#cidade').val().split(" ");
+    $('#cidade').val(cidade[0]);
 
     $.ajax({
         type: $(form).attr('method'),

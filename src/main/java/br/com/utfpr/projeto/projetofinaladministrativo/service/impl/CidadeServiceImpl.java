@@ -23,6 +23,6 @@ public class CidadeServiceImpl extends CrudServiceImpl<Cidade, Long>
 
     @Override
     public List<Cidade> complete(String texto, Long idEstado) {
-        return cidadeRepository.findByNomeLikeAndEstadoId("%" + texto + "%", idEstado);
+        return cidadeRepository.findByNomeLikeIgnoreCaseAndEstadoId("%" + texto + "%", idEstado);
     }
 }

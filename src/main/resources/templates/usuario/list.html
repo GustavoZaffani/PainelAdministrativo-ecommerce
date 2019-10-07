@@ -54,7 +54,18 @@
             </tr>
             </tbody>
         </table>
-
+        <nav aria-label="Paginação">
+            <ul class="pagination justify-content-center" th:if="${usuarios.totalPages > 0}">
+                <li class="page-item"
+                    th:classappend="${pageNumber == usuarios.number + 1} ? 'active' : ''"
+                    th:each="pageNumber : ${pageNumbers}">
+                    <a class="page-link"
+                       th:href="@{/usuario/(size=${usuarios.size}, page=${pageNumber})}"
+                       th:text="${pageNumber}">
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </section>
 </body>

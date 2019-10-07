@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-padrao}">
+<head>
+</head>
+<body>
+<section layout:fragment="conteudo">
+
+    <div class="card text-center border-radius-20">
+
+        <div class="card-header card-header-default">
+            <button class="btn btn-outline-primary waves-effect border-radius-20"
+                    onclick="back()">
+                <i class="fa fa-arrow-left"></i>
+            </button>
+            <h5 class="card-title m-right-10">Cadastro de Compra</h5>
+        </div>
+
+        <form id="formCompra" th:action="@{/compra}"
+              method="post"
+              th:object="${compra}">
+<!--              onsubmit="validaCategoria('/categoria', '#formCategoria')">-->
+
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group text-left">
+                            <label for="id">Código</label>
+                            <input id="id"
+                                   type="text"
+                                   class="form-control"
+                                   th:field="*{id}"
+                                   readonly/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <div class="form-group text-left">
+                            <label for="descricao">Descrição</label>
+                            <input id="descricao"
+                                   type="text"
+                                   name="descricao"
+                                   class="form-control"
+                                   th:field="*{descricao}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group text-left">
+                            <label for="dataCompra">Data de Compra</label>
+                            <input id="dataCompra"
+                                   name="dataCompra"
+                                   type="text"
+                                   class="form-control datepicker"
+                                   th:field="*{dataCompra}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group text-left">
+                            <label for="fornecedor">Fornecedor</label>
+                            <input type="text"
+                                   id="fornecedor"
+                                   name="fornecedor"
+                                   th:field="*{fornecedor}"
+                                   class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row" style="border: 1px solid #f5f6f6"></div>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group text-left">
+                            <label for="produto">Produto</label>
+                            <input type="text"
+                                   id="produto"
+                                   name="produto"
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group text-left">
+                            <label for="qtde">Quantidade</label>
+                            <input type="number"
+                                   id="qtde"
+                                   name="qtde"
+                                   class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0"
+                       width="100%">
+                    <thead>
+                    <tr>
+                        <th class="th-sm">Name
+                        </th>
+                        <th class="th-sm">Position
+                        </th>
+                        <th class="th-sm">Office
+                        </th>
+                        <th class="th-sm">Age
+                        </th>
+                        <th class="th-sm">Start date
+                        </th>
+                        <th class="th-sm">Salary
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Tiger Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011/04/25</td>
+                        <td>$320,800</td>
+                    </tr>
+                    <tr>
+                        <td>Garrett Winters</td>
+                        <td>Accountant</td>
+                        <td>Tokyo</td>
+                        <td>63</td>
+                        <td>2011/07/25</td>
+                        <td>$170,750</td>
+                    </tr>
+                    <tr>
+                        <td>Ashton Cox</td>
+                        <td>Junior Technical Author</td>
+                        <td>San Francisco</td>
+                        <td>66</td>
+                        <td>2009/01/12</td>
+                        <td>$86,000</td>
+                    </tr>
+                    <tr>
+                        <td>Cedric Kelly</td>
+                        <td>Senior Javascript Developer</td>
+                        <td>Edinburgh</td>
+                        <td>22</td>
+                        <td>2012/03/29</td>
+                        <td>$433,060</td>
+                    </tr>
+                    <tr>
+                        <td>Airi Satou</td>
+                        <td>Accountant</td>
+                        <td>Tokyo</td>
+                        <td>33</td>
+                        <td>2008/11/28</td>
+                        <td>$162,700</td>
+                    </tr>
+                    <tr>
+                        <td>Brielle Williamson</td>
+                        <td>Integration Specialist</td>
+                        <td>New York</td>
+                        <td>61</td>
+                        <td>2012/12/02</td>
+                        <td>$372,000</td>
+                    </tr>
+                    <tr>
+                        <td>Herrod Chandler</td>
+                        <td>Sales Assistant</td>
+                        <td>San Francisco</td>
+                        <td>59</td>
+                        <td>2012/08/06</td>
+                        <td>$137,500</td>
+                    </tr>
+                    <tr>
+                        <td>Rhona Davidson</td>
+                        <td>Integration Specialist</td>
+                        <td>Tokyo</td>
+                        <td>55</td>
+                        <td>2010/10/14</td>
+                        <td>$327,900</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="card-footer py-2">
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-primary border-radius-20"
+                                type="submit">Salvar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<th:block layout:fragment="script">
+    <script type="text/javascript" th:src="@{/js/compra.js}"></script>
+</th:block>
+</body>
+</html>
