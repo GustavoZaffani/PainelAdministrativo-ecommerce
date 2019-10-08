@@ -59,4 +59,13 @@ public class UtilController {
         return produtoService.complete(nomeProduto);
     }
 
+    @GetMapping("compra/produto/{id}")
+    public Produto findProdutoById(@PathVariable("id") Long id) {
+        return produtoService.findOne(id);
+    }
+
+    @GetMapping("compra/fornecedor/{id}")
+    public Fornecedor findFornecedorById(@PathVariable("id") Long id) {
+        return fornecedorService.findOne(id);
+    }
 }
