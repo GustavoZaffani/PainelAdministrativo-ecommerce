@@ -87,7 +87,8 @@ function validaFornecedor(urlDestino, form) {
                 required: true
             },
             cnpj: {
-                required: true
+                required: true,
+                cnpj: true
             },
             ie: {
                 required: true
@@ -111,7 +112,8 @@ function validaFornecedor(urlDestino, form) {
                 required: "Preenchimento obrigatório!"
             },
             cnpj: {
-                required: "Preenchimento obrigatório!"
+                required: "Preenchimento obrigatório!",
+                cnpj: "Informe um CNPJ válido!"
             },
             ie: {
                 required: "Preenchimento obrigatório!"
@@ -170,3 +172,38 @@ function validaUsuario(urlDestino, form) {
         }
     });
 }
+
+function validaCompra(urlDestino, form) {
+    $('#formCompra').validate({
+        rules:{
+            descricao: {
+                required: true
+            },
+            dataCompra: {
+                required: true
+            },
+            fornecedor: {
+                required: true
+            }
+
+        },
+        messages: {
+            descricao: {
+                required: "Preenchimento obrigatório!"
+            },
+            dataCompra: {
+                required: "Preenchimento obrigatório!"
+            },
+            fornecedor: {
+                required: "Preenchimento obrigatório!"
+            }
+        },
+        submitHandler: function (frm) {
+            return saveCompra(urlDestino, form);
+        }
+    });
+}
+
+$.validator.addMethod("cnpj", function(value, element) {
+    return this.optional(element) || /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/.test(value);
+}, "Informe um CNPJ válido!");

@@ -1,5 +1,9 @@
 package br.com.utfpr.projeto.projetofinaladministrativo.model;
 
+import br.com.utfpr.projeto.projetofinaladministrativo.config.LocalDateDeserializer;
+import br.com.utfpr.projeto.projetofinaladministrativo.config.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,6 +32,8 @@ public class Compra {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @NotNull(message = "O campo 'Data de Compra' deve ser selecionado.")
     @Column(name = "data_compra", nullable = false)
     private LocalDate dataCompra;

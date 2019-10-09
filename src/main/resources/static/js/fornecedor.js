@@ -3,6 +3,7 @@ $(function () {
     buildCompletes();
     habilitaCidade();
     findDadosOnEdit();
+    $('#cnpj').mask('99.999.999/9999-99');
 });
 
 function findDadosOnEdit() {
@@ -86,6 +87,7 @@ function saveForn(urlDestino, form) {
     $('#estado').val(estado[0]);
     let cidade = $('#cidade').val().split(" ");
     $('#cidade').val(cidade[0]);
+    $('#cnpj').val($('#cnpj').val().replace(/[^\d]+/g,''));
 
     $.ajax({
         type: $(form).attr('method'),

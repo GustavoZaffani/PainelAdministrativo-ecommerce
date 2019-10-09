@@ -65,12 +65,13 @@ public class CompraController {
     }
 
     @PostMapping
-    public ResponseEntity save(@Valid Compra compra,
+    public ResponseEntity save(@RequestBody @Valid Compra compra,
                                BindingResult result) {
 
         if (result.hasErrors()) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
+        compra.getCompraProdutos().stream().forEach(compraProduto -> compraProduto.setCompra(compra));
         compraService.save(compra);
         return new ResponseEntity(HttpStatus.OK);
     }

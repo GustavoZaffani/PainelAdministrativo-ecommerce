@@ -22,9 +22,9 @@
         <form id="formCompra" th:action="@{/compra}"
               method="post"
               th:object="${compra}"
-              onsubmit="saveCompra(event)">
-            <!--              onsubmit="validaCategoria('/categoria', '#formCategoria')">-->
+              onsubmit="validaCompra('/compra', '#formCompra')">
 
+            <input type="hidden" th:object="${compra}" id="teucu">
             <div class="card-body">
 
                 <div class="row">
@@ -62,7 +62,7 @@
                                    th:field="*{dataCompra}"/>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-9">
                         <div class="form-group text-left">
                             <label for="fornecedor">Fornecedor</label>
                             <input type="text"
@@ -108,8 +108,6 @@
                 <table class="table table-responsive-md table-striped table-bordered table-sm" id="table_produtos">
                     <thead>
                     <tr>
-                        <th class="th-sm">Cód
-                        </th>
                         <th class="th-sm">Produto
                         </th>
                         <th class="th-sm">Quantidade
@@ -117,6 +115,8 @@
                         <th class="th-sm">Valor Unit
                         </th>
                         <th class="th-sm">Total
+                        </th>
+                        <th class="th-sm">Opção
                         </th>
                     </tr>
                     </thead>
