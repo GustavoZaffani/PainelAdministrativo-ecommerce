@@ -1,6 +1,5 @@
 package br.com.utfpr.projeto.projetofinaladministrativo.controller;
 
-import br.com.utfpr.projeto.projetofinaladministrativo.model.Marca;
 import br.com.utfpr.projeto.projetofinaladministrativo.model.Produto;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.CategoriaService;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.MarcaService;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;

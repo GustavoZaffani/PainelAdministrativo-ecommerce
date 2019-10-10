@@ -22,13 +22,17 @@ $(document).ready(function () {
     });
 
     $("#close-sidebar").click(function() {
+        localStorage.setItem("sidebar_closed", true);
         $(".page-wrapper").removeClass("toggled");
     });
     $("#show-sidebar").click(function() {
         $(".page-wrapper").addClass("toggled");
     });
     $('main').click(function(){
+        localStorage.setItem("sidebar_closed", true);
         $(".page-wrapper").removeClass("toggled");
     });
-
+    if (localStorage.getItem("sidebar_closed") == "true") {
+        $(".page-wrapper").removeClass("toggled");
+    }
 });

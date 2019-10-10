@@ -1,3 +1,17 @@
+function getIdUrl() {
+    var id;
+    id = window.location.pathname.slice(1);
+    id = id.split("/");
+    return id[1];
+}
+
+function formataMoeda(valor) {
+    let valorReturn = Number(valor);
+    valorReturn = valorReturn.toFixed(2);
+    valorReturn = valorReturn.replace('.', ',');
+    return valorReturn;
+}
+
 function save(urlDestino, form) {
     console.log($(form).serialize());
     $.ajax({

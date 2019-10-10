@@ -2,6 +2,7 @@ package br.com.utfpr.projeto.projetofinaladministrativo.model;
 
 import br.com.utfpr.projeto.projetofinaladministrativo.config.LocalDateDeserializer;
 import br.com.utfpr.projeto.projetofinaladministrativo.config.LocalDateSerializer;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
@@ -46,5 +47,6 @@ public class Compra {
     @NotNull(message = "Deve ser escolhido ao menos 1 produto.")
     @OneToMany(mappedBy = "compra",
             cascade = {CascadeType.ALL, CascadeType.REMOVE})
+    @JsonManagedReference
     private List<CompraProduto> compraProdutos;
 }

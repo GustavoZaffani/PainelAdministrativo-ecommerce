@@ -1,5 +1,6 @@
 package br.com.utfpr.projeto.projetofinaladministrativo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,6 +33,7 @@ public class CompraProduto {
     private Produto produto;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "compra_id", referencedColumnName = "id")
     private Compra compra;
 }

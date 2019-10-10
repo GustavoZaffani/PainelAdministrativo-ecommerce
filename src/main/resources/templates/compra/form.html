@@ -24,7 +24,6 @@
               th:object="${compra}"
               onsubmit="validaCompra('/compra', '#formCompra')">
 
-            <input type="hidden" th:object="${compra}" id="teucu">
             <div class="card-body">
 
                 <div class="row">
@@ -34,7 +33,6 @@
                             <input id="id"
                                    type="text"
                                    class="form-control"
-                                   th:field="*{id}"
                                    readonly/>
                         </div>
                     </div>
@@ -45,8 +43,7 @@
                             <input id="descricao"
                                    type="text"
                                    name="descricao"
-                                   class="form-control"
-                                   th:field="*{descricao}"/>
+                                   class="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -58,8 +55,7 @@
                             <input id="dataCompra"
                                    name="dataCompra"
                                    type="text"
-                                   class="form-control datepicker"
-                                   th:field="*{dataCompra}"/>
+                                   class="form-control datepicker"/>
                         </div>
                     </div>
                     <div class="col-md-9">
@@ -68,7 +64,7 @@
                             <input type="text"
                                    id="fornecedor"
                                    name="fornecedor"
-                                   th:field="*{fornecedor}"
+
                                    class="form-control">
                         </div>
                     </div>
@@ -122,6 +118,12 @@
                     </thead>
                     <tbody id="dados"></tbody>
                 </table>
+
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <span id="total" style="font-size: 20px; font-weight: bolder"></span>
+                    </div>
+                </div>
 
             </div>
             <div class="card-footer py-2">

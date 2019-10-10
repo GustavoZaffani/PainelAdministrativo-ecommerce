@@ -1,10 +1,7 @@
 package br.com.utfpr.projeto.projetofinaladministrativo.controller;
 
 import br.com.utfpr.projeto.projetofinaladministrativo.model.Compra;
-import br.com.utfpr.projeto.projetofinaladministrativo.model.CompraProduto;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.CompraService;
-import br.com.utfpr.projeto.projetofinaladministrativo.service.FornecedorService;
-import br.com.utfpr.projeto.projetofinaladministrativo.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,9 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,12 +24,6 @@ public class CompraController {
 
     @Autowired
     private CompraService compraService;
-
-    @Autowired
-    private FornecedorService fornecedorService;
-
-    @Autowired
-    private ProdutoService produtoService;
 
     @GetMapping
     public String findAll(@RequestParam("page") Optional<Integer> page,
@@ -71,13 +59,19 @@ public class CompraController {
         if (result.hasErrors()) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        compra.getCompraProdutos().stream().forEach(compraProduto -> compraProduto.setCompra(compra));
+        compra.getCompraProdutos().forEach(compraProduto -> compraProduto.setCompra(compra));
         compraService.save(compra);
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @GetMapping("getById/{id}")
+    @ResponseBody
+    public Compra findById(@PathVariable Long id) {
+        return compraService.findOne(id);
+    }
+
     @GetMapping("{id}")
-    public String findById(@PathVariable Long id, Model model) {
+    public String edit(@PathVariable Long id, Model model) {
         model.addAttribute("compra", compraService.findOne(id));
         return "compra/form";
     }
@@ -90,22 +84,5 @@ public class CompraController {
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-    }
-
-    @GetMapping("teste")
-    public String buildCompra() {
-        Compra compra = new Compra();
-        compra.setDescricao("teste");
-        compra.setDataCompra(LocalDate.now());
-        compra.setFornecedor(fornecedorService.findOne(1L));
-
-        CompraProduto compraProduto = new CompraProduto();
-        compraProduto.setCompra(compra);
-        compraProduto.setProduto(produtoService.findOne(1L));
-        compraProduto.setQtde(1);
-        compraProduto.setValor(new BigDecimal(3));
-
-        compra.setCompraProdutos(Arrays.asList(compraProduto));
-        return "compra/list";
     }
 }

@@ -1,8 +1,6 @@
 package br.com.utfpr.projeto.projetofinaladministrativo.controller;
 
 import br.com.utfpr.projeto.projetofinaladministrativo.model.Fornecedor;
-import br.com.utfpr.projeto.projetofinaladministrativo.service.CidadeService;
-import br.com.utfpr.projeto.projetofinaladministrativo.service.EstadoService;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -1,12 +1,41 @@
 var listCompraProduto = [];
 var compra;
 var hasProdutoTable = false;
+var idCompra = null;
 
 $(function () {
     validaCompra('/compra', '#formCompra');
     buildCompletes();
+    if (!isNaN(Number(getIdUrl()))) {
+        idCompra = getIdUrl();
+    }
     $('#table_produtos').hide();
+    if (idCompra != null && !isNaN(Number(idCompra))) {
+        $.get(`getById/${idCompra}`, function (data) {
+            compra = data;
+            preencheCampos();
+        });
+    }
 });
+
+function preencheCampos() {
+    $('#id').val(compra.id);
+    $('#descricao').val(compra.descricao);
+    $('#dataCompra').val(compra.dataCompra);
+    findFornecedorOnEdit(compra.fornecedor.id);
+    listCompraProduto = new Array();
+    compra.compraProdutos.forEach(compraProduto => {
+        let newCompraProduto = new CompraProduto(
+            compraProduto.id,
+            compraProduto.qtde,
+            compraProduto.valor,
+            compraProduto.produto
+        );
+        listCompraProduto.push(newCompraProduto);
+    });
+    buildLista();
+    setVlrTotalCompra();
+}
 
 function buildCompletes() {
     $("#fornecedor").autocomplete({
@@ -57,40 +86,55 @@ function addProduto(event) {
     let idProduto = $('#produto').val().split(" ");
     idProduto = idProduto[0];
 
-    if (hasProduto(idProduto)) {
-        listCompraProduto.forEach(value => {
-            if (value.produto.id == idProduto) {
-                value.qtde += Number($('#qtde').val());
-            }
-        });
-        buildLista();
-    } else {
-        var produto;
-        $.get(`produto/${idProduto}`, function (data) {
-            if (data != null) {
-                produto = data;
-                let novoCompraProduto = new CompraProduto(
-                    null,
-                    Number($('#qtde').val()),
-                    produto.precoCusto,
-                    produto
-                );
-                listCompraProduto.push(novoCompraProduto);
-                buildLista();
-            }
-        });
+    if (idProduto != null && $('#qtde').val() != 0) {
+        if (hasProduto(idProduto)) {
+            listCompraProduto.forEach(value => {
+                if (value.produto.id == idProduto) {
+                    value.qtde += Number($('#qtde').val());
+                }
+            });
+            buildLista();
+        } else {
+            var produto;
+            $.get(`produto/${idProduto}`, function (data) {
+                if (data != null) {
+                    produto = data;
+                    let novoCompraProduto = new CompraProduto(
+                        null,
+                        Number($('#qtde').val()),
+                        produto.precoCusto,
+                        produto
+                    );
+                    listCompraProduto.push(novoCompraProduto);
+                    buildLista();
+                }
+            });
+        }
     }
+    setTimeout(function () {
+        $('#produto').val("");
+        $('#qtde').val("");
+        $('#produto').focus();
+        setVlrTotalCompra();
+    }, 250);
 }
 
 function hasProduto(idProduto) {
+    hasProdutoTable = false;
     listCompraProduto.forEach(value => {
         if (value.produto.id == idProduto) {
             hasProdutoTable = true;
-        } else {
-            hasProdutoTable = false;
         }
     });
     return hasProdutoTable;
+}
+
+function setVlrTotalCompra() {
+    var vlr = 0;
+    listCompraProduto.forEach(value => {
+        vlr += (value.valor * value.qtde);
+    });
+    $('#total').text("Valor Total: R$ " + formataMoeda(vlr));
 }
 
 function buildLista() {
@@ -101,8 +145,8 @@ function buildLista() {
                 <tr class="data">
                     <td>${compraProduto.produto.nome}</td>
                     <td>${compraProduto.qtde}</td>
-                    <td>R$ ${compraProduto.valor}</td>
-                    <td>R$ ${getVlrTotalProduto(compraProduto.valor, compraProduto.qtde)}</td>
+                    <td>R$ ${formataMoeda(compraProduto.valor)}</td>
+                    <td>R$ ${formataMoeda(getVlrTotalProduto(compraProduto.valor, compraProduto.qtde))}</td>
                     <td>
                         <a onclick="removeItem(${compraProduto.produto.id})"
                             class="btn btn-danger btn-delete" title="Remover">
@@ -125,6 +169,7 @@ function removeItem(idProduto) {
         }
     });
     buildLista();
+    setVlrTotalCompra();
 }
 
 function getVlrTotalProduto(valorUnit, qtde) {
@@ -136,9 +181,8 @@ function saveCompra(urlDestino, form) {
     idFornecedor = idFornecedor[0];
     $.get(`fornecedor/${idFornecedor}`, function (fornecedor) {
         if (fornecedor != null) {
-            console.log(fornecedor);
             compra = new Compra(
-                null,
+                idCompra,
                 $('#descricao').val(),
                 $('#dataCompra').val(),
                 fornecedor,
@@ -183,4 +227,12 @@ function clearRepet() {
     compra.compraProdutos.forEach(compraProduto => {
         compraProduto.compra = null;
     })
+}
+
+function findFornecedorOnEdit(idFornecedor) {
+    $.get(`fornecedor/${idFornecedor}`, function (data) {
+        if (data != null) {
+            $('#fornecedor').val(data.id + " - " + data.nomeFantasia);
+        }
+    });
 }

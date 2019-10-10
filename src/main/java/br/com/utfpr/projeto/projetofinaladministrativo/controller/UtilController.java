@@ -8,7 +8,6 @@ import br.com.utfpr.projeto.projetofinaladministrativo.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,7 +29,7 @@ public class UtilController {
 
     @GetMapping("fornecedor/cidade/complete/{idEstado}")
     public List<Cidade> completeCidade(@PathVariable("idEstado") Long idEstado,
-                                 @RequestParam("texto") String texto) {
+                                       @RequestParam("texto") String texto) {
         return cidadeService.complete(texto, idEstado);
     }
 
@@ -63,10 +62,4 @@ public class UtilController {
     public Fornecedor findFornecedorById(@PathVariable("id") Long id) {
         return fornecedorService.findOne(id);
     }
-
-    @PostMapping("compra/teste")
-    public void teste(@RequestBody Compra compra) {
-        System.out.println("chamou krl");
-    }
-
 }

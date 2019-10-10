@@ -38,7 +38,7 @@
             <tbody>
             <tr th:each="compra: ${compras}" th:id="'row_' + ${compra.id}">
                 <td class="text-center" th:text="${compra.id}"></td>
-                <td class="text-center" th:text="${compra.dataCompra}"></td>
+                <td class="text-center" th:text="${#temporals.format(compra.dataCompra, 'dd/MM/yyyy')}"></td>
                 <td class="text-center" th:text="${compra.fornecedor.nomeFantasia}"></td>
                 <td class="text-center" th:text="${compra.descricao}"></td>
                 <td width="1%">
