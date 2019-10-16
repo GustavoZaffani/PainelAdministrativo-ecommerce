@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// Utilizei esse UtilController pois não sabia que dava para fazer o mesmo no @Controller
+// portanto, não quis alterar, pois já estava funcionando.. hehe
 @RestController
 public class UtilController {
 

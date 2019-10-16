@@ -46,7 +46,7 @@ public class Compra {
 
     @NotNull(message = "Deve ser escolhido ao menos 1 produto.")
     @OneToMany(mappedBy = "compra",
-            cascade = {CascadeType.ALL, CascadeType.REMOVE})
+            cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JsonManagedReference
     private List<CompraProduto> compraProdutos;
 }

@@ -164,8 +164,8 @@ function buildLista() {
 
 function removeItem(idProduto) {
     listCompraProduto.forEach((value, index) => {
-        if (value.produto.id == idProduto) {
-            listCompraProduto.splice(listCompraProduto.indexOf(index), 1);
+        if (Number(value.produto.id) === Number(idProduto)) {
+            listCompraProduto.splice(index, 1);
         }
     });
     buildLista();
