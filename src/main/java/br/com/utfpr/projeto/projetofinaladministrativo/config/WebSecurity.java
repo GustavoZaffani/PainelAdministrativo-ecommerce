@@ -29,7 +29,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .and().logout()
                 .logoutSuccessUrl("/login")
                 .and().authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/**").hasRole("ADMIN")
                 .antMatchers("/**").authenticated();
     }
 
