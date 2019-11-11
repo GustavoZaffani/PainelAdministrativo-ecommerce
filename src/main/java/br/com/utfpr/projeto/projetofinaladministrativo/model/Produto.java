@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -45,4 +46,17 @@ public class Produto {
     @ManyToOne
     @JoinColumn(name = "categoria_id", referencedColumnName = "id")
     private Categoria categoria;
+
+    @NotEmpty(message = "O campo 'Tipo' é de preenchimento obrigatório.")
+    @Column(name = "tipo", nullable = false)
+    private String tipo;
+
+    @NotNull(message = "O campo 'Desconto a Vista' é de preenchimento obrigatório.")
+    @Column(name = "desc_a_vista", nullable = false)
+    private BigDecimal descAVista;
+
+    @NotNull(message = "O campo 'Qtde de Parcelas' é de preenchimento obrigatório.")
+    @Column(name = "qtde_parcelas", nullable = false)
+    private Integer qtdeParcelas;
+
 }

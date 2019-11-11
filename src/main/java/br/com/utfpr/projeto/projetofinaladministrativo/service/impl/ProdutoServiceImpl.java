@@ -25,4 +25,9 @@ public class ProdutoServiceImpl extends CrudServiceImpl<Produto, Long>
     public List<Produto> complete(String nome) {
         return produtoRepository.findByNomeLikeIgnoreCase("%" + nome + "%");
     }
+
+    @Override
+    public List<Produto> findByTipoEquals(String tipo) {
+        return produtoRepository.findByTipoEquals(tipo);
+    }
 }

@@ -4,6 +4,7 @@ INSERT INTO usuario(nome, username, password) VALUES ('Teste', 'teste','$2a$10$.
 
 -- INSERT PERMISSÃO
 INSERT INTO permissao (nome) values('ROLE_ADMIN');
+INSERT INTO permissao (nome) values('ROLE_CLIENTE');
 
 -- INSERT PERMISSÕES DOS USUÁRIOS
 INSERT INTO usuario_permissoes(usuario_id, permissoes_id) VALUES (1, 1);
@@ -24,11 +25,11 @@ INSERT INTO marca (descricao) VALUES ('Marca 4');
 INSERT INTO marca (descricao) VALUES ('Marca 5');
 
 --INSERT PRODUTO
-INSERT INTO produto (nome, preco_custo, preco_venda, marca_id, categoria_id) VALUES ('Produto 1', 10, 100, 1, 2);
-INSERT INTO produto (nome, preco_custo, preco_venda, marca_id, categoria_id) VALUES ('Produto 2', 20, 200, 2, 3);
-INSERT INTO produto (nome, preco_custo, preco_venda, marca_id, categoria_id) VALUES ('Produto 3', 30, 300, 2, 1);
-INSERT INTO produto (nome, preco_custo, preco_venda, marca_id, categoria_id) VALUES ('Produto 4', 40, 400, 3, 5);
-INSERT INTO produto (nome, preco_custo, preco_venda, marca_id, categoria_id) VALUES ('Produto 5', 50, 500, 4, 4);
+INSERT INTO produto (nome, preco_custo, preco_venda, marca_id, categoria_id, tipo, desc_a_vista, qtde_parcelas) VALUES ('Produto 1', 10, 100, 1, 2, 'P', 10, 12);
+INSERT INTO produto (nome, preco_custo, preco_venda, marca_id, categoria_id, tipo, desc_a_vista, qtde_parcelas) VALUES ('Produto 2', 20, 200, 2, 3, 'N', 15, 6);
+INSERT INTO produto (nome, preco_custo, preco_venda, marca_id, categoria_id, tipo, desc_a_vista, qtde_parcelas) VALUES ('Produto 3', 30, 300, 2, 1, 'X', 20, 8);
+INSERT INTO produto (nome, preco_custo, preco_venda, marca_id, categoria_id, tipo, desc_a_vista, qtde_parcelas) VALUES ('Produto 4', 40, 400, 3, 5, 'P', 25, 10);
+INSERT INTO produto (nome, preco_custo, preco_venda, marca_id, categoria_id, tipo, desc_a_vista, qtde_parcelas) VALUES ('Produto 5', 50, 500, 4, 4, 'X', 50, 3);
 
 --INSERT PAIS
 INSERT INTO pais (id, nome, sigla) VALUES (1, 'Brasil', 'BR');

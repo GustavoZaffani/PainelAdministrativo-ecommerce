@@ -8,4 +8,6 @@ import java.util.List;
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     List<Produto> findByNomeLikeIgnoreCase(String nome);
+
+    List<Produto> findByTipoEquals(String tipo);
 }

@@ -53,6 +53,19 @@ public class ProdutoController {
         return "produto/list";
     }
 
+    // método utilizado para buscar os produtos que serão vendidos
+    @ResponseBody
+    @GetMapping("api/produtos/tipo")
+    public List<Produto> findProdutoVenda(@RequestParam("tipo") String tipo) {
+        return produtoService.findByTipoEquals(tipo);
+    }
+
+    @ResponseBody
+    @GetMapping("api/produto")
+    public Produto findProdutoById(@RequestParam("id") Long id) {
+        return produtoService.findOne(id);
+    }
+
     @GetMapping("form")
     public String form(Model model) {
         loadCombo(model);

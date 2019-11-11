@@ -104,6 +104,45 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group text-left">
+                            <label for="tipo">Tipo</label>
+                            <select class="form-control"
+                                    id="tipo"
+                                    name="tipo"
+                                    th:field="*{tipo}">
+                                <option value="">Selecione uma Opção</option>
+                                <option value="P">PS4</option>
+                                <option value="X">Xbox</option>
+                                <option value="N">Nintendo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group text-left">
+                            <label for="qtdeParcela">Qtde Parcelas</label>
+                            <input id="qtdeParcela"
+                                   name="qtdeParcela"
+                                   type="number"
+                                   class="form-control"
+                                   th:field="*{qtdeParcelas}"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group text-left">
+                            <label for="descAvista">Desconto a Vista (%)</label>
+                            <input id="descAvista"
+                                   name="descAvista"
+                                   type="number"
+                                   class="form-control"
+                                   th:field="*{descAVista}"/>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="card-footer py-2">
                 <div class="row">

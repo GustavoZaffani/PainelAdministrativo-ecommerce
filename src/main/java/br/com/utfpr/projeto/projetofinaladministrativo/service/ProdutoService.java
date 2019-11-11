@@ -7,4 +7,6 @@ import java.util.List;
 public interface ProdutoService extends CrudService<Produto, Long> {
 
     List<Produto> complete(String nome);
+
+    List<Produto> findByTipoEquals(String tipo);
 }
