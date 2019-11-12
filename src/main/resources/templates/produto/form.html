@@ -21,7 +21,8 @@
         <form id="formProduto" th:action="@{/produto}"
               method="post"
               th:object="${produto}"
-              onsubmit="validaProduto('/produto', '#formProduto')">
+              enctype="multipart/form-data"
+              onsubmit="validaProduto(event)">
 
             <div class="card-body">
 
@@ -139,6 +140,14 @@
                                    type="number"
                                    class="form-control"
                                    th:field="*{descAVista}"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="anexo">Imagem (capa)</label>
+                            <input type="file" name="anexo" id="anexo"
+                                   class="form-control"/>
                         </div>
                     </div>
                 </div>

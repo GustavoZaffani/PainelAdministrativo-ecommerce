@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "if")
+@EqualsAndHashCode(of = "id")
 @Table(name = "cidade")
 public class Cidade {
 

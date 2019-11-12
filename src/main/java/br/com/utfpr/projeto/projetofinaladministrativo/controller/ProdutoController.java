@@ -4,6 +4,9 @@ import br.com.utfpr.projeto.projetofinaladministrativo.model.Produto;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.CategoriaService;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.MarcaService;
 import br.com.utfpr.projeto.projetofinaladministrativo.service.ProdutoService;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,8 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,12 +31,14 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoService produtoService;
-
     @Autowired
     private CategoriaService categoriaService;
-
     @Autowired
     private MarcaService marcaService;
+    @Autowired
+    private AmazonS3 amazonS3;
+
+    private static final String BUCKET="projetoweb";
 
     @GetMapping
     public String findAll(@RequestParam("page") Optional<Integer> page,
@@ -75,12 +82,29 @@ public class ProdutoController {
 
     @PostMapping
     public ResponseEntity save(@Valid Produto produto,
+                               @RequestParam("anexo") MultipartFile capa,
                                BindingResult result) {
         if (result.hasErrors()) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
+
+        if (capa != null && !capa.getOriginalFilename().isEmpty()) {
+            produto.setImgCapa(saveFile(capa));
+        }
         produtoService.save(produto);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    private String saveFile(MultipartFile capa) {
+        try {
+            amazonS3.putObject(new PutObjectRequest(BUCKET,
+                    capa.getOriginalFilename(), capa.getInputStream(),null)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+            return "http://" + BUCKET + ".s3-sa-east-1.amazonaws.com/" + capa.getOriginalFilename();
+
+        } catch (IllegalStateException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("{id}")

@@ -34,7 +34,7 @@ function validaMarca(urlDestino, form) {
     });
 }
 
-function validaProduto(urlDestino, form) {
+function validaProduto(event) {
     $('#formProduto').validate({
         rules:{
             nome: {
@@ -72,7 +72,7 @@ function validaProduto(urlDestino, form) {
             }
         },
         submitHandler: function (frm) {
-            return save(urlDestino, form);
+            return saveProduto(event);
         }
     });
 }
