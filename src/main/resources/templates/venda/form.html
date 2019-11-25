@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-padrao}">
+<head>
+</head>
+<body>
+<section layout:fragment="conteudo">
+
+    <div class="card text-center border-radius-20">
+
+        <div class="card-header card-header-default">
+            <button class="btn btn-outline-primary waves-effect border-radius-20"
+                    onclick="back()">
+                <i class="fa fa-arrow-left"></i>
+            </button>
+            <h5 class="card-title m-right-10">Detalhes da Venda</h5>
+        </div>
+
+        <form id="formCompra">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group text-left">
+                            <label for="id">Código</label>
+                            <input id="id"
+                                   type="text"
+                                   class="form-control"
+                                   readonly/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <div class="form-group text-left">
+                            <label for="cliente">Cliente</label>
+                            <input id="cliente"
+                                   type="text"
+                                   name="cliente"
+                                   class="form-control"
+                                   readonly/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group text-left">
+                            <label for="dataVenda">Data de Venda</label>
+                            <input id="dataVenda"
+                                   name="dataVenda"
+                                   type="text"
+                                   class="form-control datepicker"
+                                   readonly/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group text-left">
+                            <label for="taxaFrete">Taxa Frete</label>
+                            <input type="text"
+                                   id="taxaFrete"
+                                   name="taxaFrete"
+                                   class="form-control"
+                                   readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group text-left">
+                            <label for="situacao">Situação</label>
+                            <select name="situacao" id="situacao" class="form-control">
+                                <option value="AA">Aguardando aprovação</option>
+                                <option value="PA">Pagamento aprovado</option>
+                                <option value="ES">Em separação</option>
+                                <option value="ET">Enviado à transportadora</option>
+                                <option value="SE">Saiu para entrega</option>
+                                <option value="PE">Pedido entregue</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row" style="border: 1px solid #f5f6f6"></div>
+                <br>
+
+                <div class="row">
+                    <h6>Endereço da Entrega</h6>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group text-left">
+                            <label for="rua">Rua</label>
+                            <input id="rua"
+                                   name="rua"
+                                   class="form-control"
+                                   readonly
+                                   type="text">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group text-left">
+                            <label for="bairro">Bairro</label>
+                            <input id="bairro"
+                                   name="bairro"
+                                   class="form-control"
+                                   readonly
+                                   type="text">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group text-left">
+                            <label for="nro">Número</label>
+                            <input id="nro"
+                                   name="nro"
+                                   class="form-control"
+                                   readonly
+                                   type="number">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group text-left">
+                            <label for="cidade">Cidade</label>
+                            <input type="text"
+                                   id="cidade"
+                                   name="cidade"
+                                   readonly
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group text-left">
+                            <label for="estado">Estado</label>
+                            <input type="text"
+                                   id="estado"
+                                   name="estado"
+                                   readonly
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group text-left">
+                            <label for="cep">CEP</label>
+                            <input id="cep"
+                                   name="cep"
+                                   class="form-control"
+                                   readonly
+                                   type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row" style="border: 1px solid #f5f6f6"></div>
+                <br>
+
+                <table class="table table-responsive-md table-striped table-bordered table-sm" id="table_produtos">
+                    <thead>
+                    <tr>
+                        <th class="th-sm">Cód</th>
+                        <th class="th-sm">Descrição</th>
+                        <th class="th-sm">Qtde</th>
+                        <th class="th-sm">Valor Unit</th>
+                        <th class="th-sm">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody id="dados"></tbody>
+                </table>
+
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <span id="total" style="font-size: 20px; font-weight: bolder"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer py-2">
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-primary border-radius-20"
+                                type="submit"
+                                onclick="updateSituacao()">Salvar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<th:block layout:fragment="script">
+    <script type="text/javascript" th:src="@{/js/util.js}"></script>
+    <script type="text/javascript" th:src="@{/js/venda.js}"></script>
+    <script type="text/javascript" th:src="@{/js/vendaForm.js}"></script>
+</th:block>
+</body>
+</html>
+

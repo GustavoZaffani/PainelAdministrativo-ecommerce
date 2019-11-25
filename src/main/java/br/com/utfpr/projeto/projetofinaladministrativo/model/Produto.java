@@ -59,6 +59,6 @@ public class Produto {
     @Column(name = "qtde_parcelas", nullable = false)
     private Integer qtdeParcelas;
 
-    @Column(name = "imgCapa", nullable = false)
+    @Column(name = "imgCapa")
     private String imgCapa;
 }

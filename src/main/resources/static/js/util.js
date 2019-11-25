@@ -1,8 +1,14 @@
 function getIdUrl() {
-    var id;
-    id = window.location.pathname.slice(1);
-    id = id.split("/");
-    return id[1];
+    var idGet;
+    let partes;
+    partes = window.location.pathname.slice(1);
+    partes = partes.split("/");
+    partes.forEach(parte => {
+       if (!isNaN(parte)) {
+           idGet = parte;
+       }
+    });
+    return idGet;
 }
 
 function formataMoeda(valor) {
