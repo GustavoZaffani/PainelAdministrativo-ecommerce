@@ -9,4 +9,10 @@ public interface ProdutoService extends CrudService<Produto, Long> {
     List<Produto> complete(String nome);
 
     List<Produto> findByTipoEquals(String tipo);
+
+    List<Produto> findByTipoEqualsAndCategoriaEquals(String tipo, Long idCarrinho);
+
+    List<Object[]> findProdutosMaisVendidos();
+
+    List<Object[]> findProdutosMaisComprados();
 }

@@ -30,4 +30,19 @@ public class ProdutoServiceImpl extends CrudServiceImpl<Produto, Long>
     public List<Produto> findByTipoEquals(String tipo) {
         return produtoRepository.findByTipoEquals(tipo);
     }
+
+    @Override
+    public List<Produto> findByTipoEqualsAndCategoriaEquals(String tipo, Long idCarrinho) {
+        return produtoRepository.findByTipoEqualsAndCategoriaIdEquals("%" + tipo + "%", idCarrinho);
+    }
+
+    @Override
+    public List<Object[]> findProdutosMaisVendidos() {
+        return produtoRepository.findProdutosMaisVendidos();
+    }
+
+    @Override
+    public List<Object[]> findProdutosMaisComprados() {
+        return produtoRepository.findProdutosMaisComprados();
+    }
 }

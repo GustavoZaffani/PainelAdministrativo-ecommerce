@@ -63,6 +63,13 @@ public class ProdutoController {
     }
 
     @ResponseBody
+    @GetMapping("api/produtos/tipo/categoria")
+    public List<Produto> findProdutoVenda(@RequestParam("tipo") String tipo,
+                                          @RequestParam("categoria") Long idCategoria) {
+        return produtoService.findByTipoEqualsAndCategoriaEquals(tipo, idCategoria);
+    }
+
+    @ResponseBody
     @GetMapping("api/produto")
     public Produto findProdutoById(@RequestParam("id") Long id) {
         return produtoService.findOne(id);
@@ -97,13 +104,11 @@ public class ProdutoController {
     }
 
     private void saveFile(Produto produto, MultipartFile anexo) {
-//        File dir = new File("C:/produto/");
-        File dir = new File("D:/projetoFinalJavaWebIParte2/src/main/resources/static/img/capas/");
+        File dir = new File("C:/produto/");
         if (!dir.exists()) {
             dir.mkdirs();
         }
-//        String caminhoAnexo = "C:/produto/";
-        String caminhoAnexo = "D:/projetoFinalJavaWebIParte2/src/main/resources/static/img/capas/";
+        String caminhoAnexo = "C:/produto/";
         String extensao = anexo.getOriginalFilename().substring(
                 anexo.getOriginalFilename().lastIndexOf(".")
         );

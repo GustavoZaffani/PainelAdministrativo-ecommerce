@@ -79,4 +79,10 @@ public class CategoriaController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("api/find-all")
+    @ResponseBody
+    public List<Categoria> findCategorias() {
+        return categoriaService.findAll();
+    }
 }

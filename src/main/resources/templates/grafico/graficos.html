@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-padrao}">
+<head>
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <script type="text/javascript"
+            src="https://www.gstatic.com/charts/loader.js"></script>
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="jumbotron">
+                <div class="d-flex justify-content-around">
+                    <div id="piechart" style="width: 45%; height: 500px;"></div>
+                    <div style="border-left: 1px solid #e6e6e6"></div>
+                    <div id="bar" style="width: 45%; height: 500px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<th:block layout:fragment="script">
+    <script type="text/javascript" th:src="@{/js/graficos.js}"></script>
+</th:block>
+</body>
+</html>
